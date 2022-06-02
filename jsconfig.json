@@ -2,13 +2,13 @@
   "compilerOptions": {
     "baseUrl": ".",
     "paths": {
-        "@navigations" : ["src/navigations"],
-        "@core/views" : ["src/core/presentation/views"],
-        "@core/layouts" : ["src/core/presentation/layouts"],
-        "@core/components" : ["src/core/presentation/components"],
-        "@core/data" : ["src/core/data"],
-        "@core/domain" : ["src/core/domain"],
-        "@redux" : ["src/redux"]
+        "@navigations/*" : ["./src/navigations"],
+        "@core/views/*" : ["./src/core/presentation/views"],
+        "@core/layouts/*" : ["./src/core/presentation/layouts"],
+        "@core/components/*" : ["./src/core/presentation/components"],
+        "@core/data/*" : ["./src/core/data"],
+        "@core/domain/*" : ["./src/core/domain"],
+        "@redux/*" : ["./src/redux"]
     }
   },
   "exclude": ["node_modules"]
