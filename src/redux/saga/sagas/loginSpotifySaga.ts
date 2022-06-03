@@ -3,7 +3,7 @@ import { AxiosResponse } from 'axios';
 import base64 from 'react-native-base64';
 
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '@env';
-import HttpClient from '@http/httpClient';
+import axios from 'axios';
 import { 
     finishLogin,
     setLoginData,
@@ -15,7 +15,7 @@ function* loginSpotify(){
     try {
         const credentials = base64.encode(SPOTIFY_CLIENT_ID + ':' + SPOTIFY_CLIENT_SECRET);
 
-        const response: AxiosResponse = yield call(HttpClient.post, '/token', 'grant_type=client_credentials', {
+        const response: AxiosResponse = yield call(axios.post, 'https://accounts.spotify.com/api/token', 'grant_type=client_credentials', {
             headers:{
                 Authorization : `Basic ${credentials}`,
                 'Content-Type': 'application/x-www-form-urlencoded',

@@ -4,17 +4,20 @@ import React, { Component } from 'react'
 import styles from './index.styles';
 
 import LinearGradientView from '@core/presentation/layouts/LinearGradientView';
-import TextInput from '@core/presentation/components/InputText';
+import SearchText from '@core/presentation/components/SearchText';
 
 export class Search extends Component {
     render() {
         return (
             <LinearGradientView>
                 <View style = { styles.busqueda }>
-                    <TextInput />
+                    <SearchText 
+                        cancelHandle={()=>{}}
+                        searchHandle={text=>{}}
+                    />
                 </View>
                 <View style = { styles.listaResultados }>
-
+                    
                 </View>
             </LinearGradientView>
         )
