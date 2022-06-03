@@ -1,9 +1,8 @@
 import { call, takeLatest, put } from 'redux-saga/effects';
-import { AxiosResponse } from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import base64 from 'react-native-base64';
 
 import { SPOTIFY_CLIENT_ID, SPOTIFY_CLIENT_SECRET } from '@env';
-import axios from 'axios';
 import { 
     finishLogin,
     setLoginData,

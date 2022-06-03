@@ -48,6 +48,7 @@ class Album{
         this.artists = artists
         this.tracks = tracks
     }
+    
 
 }
 

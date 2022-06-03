@@ -14,11 +14,13 @@ const HttpClient = Axios.create({
 HttpClient.interceptors.request.use((config: AxiosRequestConfig)=>{
 	const state = store.getState();
 	const token = state.login.login_data.access_token;
-	
+
 	config.headers = {
 		'Authorization': `Bearer ${token}`,
 		'Accept': 'application/json',
 	}
+
+	return config;
 }, error =>{
 	Promise.reject(error);
 })
