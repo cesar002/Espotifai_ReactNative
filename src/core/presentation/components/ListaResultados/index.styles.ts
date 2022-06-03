@@ -1,12 +1,9 @@
 import { StyleSheet } from 'react-native'
 
 const styles = StyleSheet.create({
-    busqueda: {
+    container: {
         flex: 1,
-    },
-    listaResultados:{
-        flex: 10,
     }
-});
+})
 
 export default styles;
