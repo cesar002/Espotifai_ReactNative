@@ -5,6 +5,7 @@ enum COLORS {
     GREEN_DEEP_DARK = '#448087',
     GRAY_GREEN_DARK = '#386371',
     GRAY_GREN_DEEP_DARK = '#2F4858',
+
 }
 
 export default COLORS;
