@@ -3,12 +3,15 @@
     "baseUrl": ".",
     "paths": {
         "@navigations/*" : ["./src/navigations"],
-        "@core/views/*" : ["./src/core/presentation/views"],
-        "@core/layouts/*" : ["./src/core/presentation/layouts"],
-        "@core/components/*" : ["./src/core/presentation/components"],
-        "@core/data/*" : ["./src/core/data"],
-        "@core/domain/*" : ["./src/core/domain"],
-        "@redux/*" : ["./src/redux"]
+        "@views/*" : ["./src/core/presentation/views"],
+        "@layouts/*" : ["./src/core/presentation/layouts"],
+        "@components/*" : ["./src/core/presentation/components"],
+        "@data/*" : ["./src/core/data"],
+        "@domain/*" : ["./src/core/domain"],
+        "@redux/*" : ["./src/redux"],
+        "@core/*" : ["./src/core"],
+        "@constants/*" : ["./src/constants"],
+        "@http/*" : ["./src/http"]
     }
   },
   "exclude": ["node_modules"]

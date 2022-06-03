@@ -1,0 +1,10 @@
+enum COLORS {
+    GREEN_LIGHT = '#A3D6AA',
+    GREEN = '#7ABAA2',
+    GREEN_DARK = '#5A9D96',
+    GREEN_DEEP_DARK = '#448087',
+    GRAY_GREEN_DARK = '#386371',
+    GRAY_GREN_DEEP_DARK = '#2F4858',
+}
+
+export default COLORS;
