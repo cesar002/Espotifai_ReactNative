@@ -1,36 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
-import Track from '@core/data/models/Track';
-import Album from '@core/data/models/Album';
-import Artista from '@core/data/models/Artista';
+import SearchResult from '@core/data/models/SearchResult';
 
-interface ISearchItem {
-    href: string;
-    limit: number;
-    next: string | null;
-    offset: number;
-    previous: string | null;
-    total: number;
-}
-
-export interface ISearchTrack extends ISearchItem {
-    items: Track[];
-}
-
-export interface ISearchAlbum extends ISearchItem {
-    items: Album[];
-}
-
-export interface ISearchArtista extends ISearchItem {
-    items: Artista[];
-}
-
-export interface ISearchState {
-    albums?: ISearchAlbum | null;
-    artists?: ISearchArtista | null;
-    tracks?: ISearchTrack | null;
-}
-
-const initialState: ISearchState = {
+const initialState: SearchResult = {
     albums: null,
     artists: null,
     tracks: null,
@@ -40,12 +11,19 @@ const searchSlice = createSlice({
     name: 'search',
     initialState,
     reducers: {
-        search(state: ISearchState, action: PayloadAction<string>){},
-        setSearchResult(state: ISearchState, action: PayloadAction<ISearchState>){
-            state = action.payload;
+        search(state: SearchResult, action: PayloadAction<string>){},
+        setSearchResult(state: SearchResult, action: PayloadAction<SearchResult>){
+            state.tracks = action.payload.tracks;
+            state.albums = action.payload.albums;
+            state.artists = action.payload.artists;
         },
+        emptySearch(state: SearchResult){
+            state.albums = initialState.albums;
+            state.artists = initialState.artists;
+            state.tracks = initialState.tracks;
+        }
     }
 });
 
-export const { search, setSearchResult } = searchSlice.actions;
+export const { search, setSearchResult, emptySearch } = searchSlice.actions;
 export default searchSlice.reducer;

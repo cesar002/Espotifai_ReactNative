@@ -5,17 +5,13 @@ import loginSlice from '@redux/slices/loginSlice';
 import searchSlice from '@redux/slices/searchSlice';
 import sagas from '@redux/saga';
 
-import AlbumRepositoryImpl from '@core/data/repositoriesImpl/AlbumRepositoryImpl';
-import ArtistaRepositoryImpl from '@core/data/repositoriesImpl/ArtistaRepositoryImpl';
-import TrackRepositoryImpl from '@core/data/repositoriesImpl/TrackRepositoryImpl';
+import SearchRepositoryImpl from '@core/data/repositoriesImpl/SearchRepositoryImpl';
 
-const albumRepository = new AlbumRepositoryImpl();
-const artistaRepository = new ArtistaRepositoryImpl();
-const trackRepository = new TrackRepositoryImpl();
+const searchRepository: SearchRepositoryImpl = new SearchRepositoryImpl();
 
 const sagaMiddleware = createSagaMiddleware({
     context:{
-        albumRepository, artistaRepository, trackRepository
+        searchRepository,
     }
 })
 const middleware = [sagaMiddleware]
@@ -25,7 +21,9 @@ const store = configureStore({
         login: loginSlice,
         search: searchSlice,
     },
-    middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(middleware),
+    middleware: (getDefaultMiddleware) => getDefaultMiddleware({
+        serializableCheck: false
+    }).concat(middleware),
 })
 
 sagaMiddleware.run(sagas)

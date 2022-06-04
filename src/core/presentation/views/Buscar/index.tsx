@@ -5,28 +5,30 @@ import { TabView, SceneMap } from 'react-native-tab-view';
 
 import styles from './index.styles';
 import {
-    search,
+    search, emptySearch
 } from '@redux/slices/searchSlice';
 import { RootState } from '@redux/store';
 import LinearGradientView from '@core/presentation/layouts/LinearGradientView';
 import SearchText from '@core/presentation/components/SearchText';
 import BarraCategorias from '@core/presentation/components/BarraCategorias';
 
+import ArtistasResultadoBusqueda from '@core/presentation/views/ArtistasResultadoBusqueda';
 
-const FirstRoute = () => (
-    <View style={{ flex: 1, backgroundColor: '#ff4081' }} />
-  );
-  
-  const SecondRoute = () => (
-    <View style={{ flex: 1, backgroundColor: '#673ab7' }} />
-  );
 
-  const renderScene = SceneMap({
-    first: FirstRoute,
+
+
+const SecondRoute = () => (
+<View style={{ flex: 1, backgroundColor: '#673ab7' }} />
+);
+
+const renderScene = SceneMap({
+    first: ArtistasResultadoBusqueda,
     second: SecondRoute,
-  });
+});
 export interface ISearchProps {
+    musica: any,
     search(text: string): void,
+    emptySearch(): void
 }
 
 class Search extends Component<ISearchProps> {
@@ -36,12 +38,17 @@ class Search extends Component<ISearchProps> {
 
         this.searchData = this.searchData.bind(this);
         this.selectCategoria = this.selectCategoria.bind(this);
+        this.cancelSearch = this.cancelSearch.bind(this);
     }
 
     public searchData(text: string){
-        if(!text){ return; }
+        if(!text){ this.props.emptySearch(); return; }
 
         this.props.search(text);
+    }
+
+    public cancelSearch(){
+        this.props.emptySearch();
     }
 
     public selectCategoria(id: any){
@@ -53,14 +60,17 @@ class Search extends Component<ISearchProps> {
             <LinearGradientView>
                 <View style = { styles.busqueda }>
                     <SearchText 
-                        cancelHandle={()=>{}}
+                        cancelHandle={ this.cancelSearch }
                         searchHandle={ this.searchData }
                     />
                 </View>
                 <View style = { styles.listaResultados }>
-                    <BarraCategorias 
-                        handlePress={ this.selectCategoria }
-                    />
+                    {this.props.musica &&
+                                        <BarraCategorias 
+                                        handlePress={ this.selectCategoria }
+                                    />
+                    }
+
                 <TabView
                     navigationState={{ index: 0, routes: [
                         { key: 'first', title: 'First' },
@@ -68,7 +78,6 @@ class Search extends Component<ISearchProps> {
                     ] }}
                     renderScene={renderScene}
                     onIndexChange={index=>{}}
-                    initialLayout={{ width: 500 }}
                     renderTabBar={() => null}
                     />
                 </View>
@@ -78,11 +87,11 @@ class Search extends Component<ISearchProps> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-
+    musica: state.search.albums
 });
 
 const mapDispatchToProps = {
-    search
+    search, emptySearch
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Search)
