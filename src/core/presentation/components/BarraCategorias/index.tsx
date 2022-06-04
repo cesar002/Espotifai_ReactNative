@@ -40,15 +40,15 @@ const BarraCategorias: React.FunctionComponent <IBarraCategoriasProps> = (props:
             >
                 <CategoriaItem 
                     titulo='Artistas'
-                    onPress={()=>pressCategoria(1)}
+                    onPress={()=>pressCategoria(0)}
                 />
                 <CategoriaItem 
                     titulo='Albunes'
-                    onPress={()=>pressCategoria(2)}
+                    onPress={()=>pressCategoria(1)}
                 />
                 <CategoriaItem 
                     titulo='Canciones'
-                    onPress={()=>pressCategoria(3)}
+                    onPress={()=>pressCategoria(2)}
                 />
             </ScrollView>
         </View>

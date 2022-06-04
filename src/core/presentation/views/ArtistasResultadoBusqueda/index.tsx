@@ -1,4 +1,4 @@
-import { Text, View, Dimensions } from 'react-native'
+import { View, Dimensions } from 'react-native'
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { RecyclerListView, DataProvider,  LayoutProvider } from 'recyclerlistview';
@@ -7,8 +7,9 @@ import { RootState } from '@redux/store';
 
 import styles from './index.syles'
 import Artista from '@core/data/models/Artista';
+import SearchListItem from '@core/presentation/components/SearchListItem';
 
-const {height, width} = Dimensions.get('window');
+const {width} = Dimensions.get('window');
 
 interface IArtistasResultadoBusquedaProps {
     artistas: Artista[];
@@ -24,7 +25,7 @@ class ArtistasResultadoBusqueda extends Component <IArtistasResultadoBusquedaPro
             (i)=>{ return this.props.artistas[i].id }, 
             (type, dim) => {
                 dim.width = width;
-                dim.height = 50
+                dim.height = 110
             }) 
 
         this.renderRow = this.renderRow.bind(this);
@@ -32,9 +33,10 @@ class ArtistasResultadoBusqueda extends Component <IArtistasResultadoBusquedaPro
 
     private renderRow(type: any, data: Artista) {
         return(
-            <View>
-                <Text>{ data.name }</Text>
-            </View>
+            <SearchListItem 
+                imageURL={ data?.images[0]?.url ?? '' }
+                titulo = { data.name }
+            />
         )
     }
 

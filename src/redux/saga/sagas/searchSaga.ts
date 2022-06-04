@@ -6,13 +6,14 @@ import SearchResult from '@core/data/models/SearchResult';
 
 function* search(action: any){
     try {
-        const searchRepository  = yield getContext("searchRepository");
-        
-        const searchResult: SearchResult = yield call(searchRepository.getSearch, action.text);
+        if(!action.payload){ return; }
+
+        const searchRepository  = yield getContext("searchRepository");     
+        const searchResult: SearchResult = yield call(searchRepository.getSearch, action.payload);
 
         yield put( setSearchResult(searchResult) )
     } catch (error) {
-        console.error(error)
+        console.error('SearchSaga', error)
     }
 }
 

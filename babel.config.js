@@ -28,6 +28,7 @@ module.exports = {
           '@core' : './src/core',
           '@constants' : './src/constants',
           '@http' : './src/http',
+          '@utils' : './src/utils',
         },
         extensions: [
           '.ios.js',

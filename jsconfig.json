@@ -11,7 +11,8 @@
         "@redux/*" : ["./src/redux"],
         "@core/*" : ["./src/core"],
         "@constants/*" : ["./src/constants"],
-        "@http/*" : ["./src/http"]
+        "@http/*" : ["./src/http"],
+        "@utils/*" : ["./src/utils"]
     }
   },
   "exclude": ["node_modules"]

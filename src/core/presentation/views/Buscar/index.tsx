@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { TabView, SceneMap } from 'react-native-tab-view';
 
+
 import styles from './index.styles';
 import {
     search, emptySearch
@@ -13,28 +14,33 @@ import SearchText from '@core/presentation/components/SearchText';
 import BarraCategorias from '@core/presentation/components/BarraCategorias';
 
 import ArtistasResultadoBusqueda from '@core/presentation/views/ArtistasResultadoBusqueda';
+import AlbunesResultadoBusqueda from '@core/presentation/views/AlbunesResultadoBusqueda';
+import TracksResultadoBusqueda from '@core/presentation/views/TracksResultadoBusqueda';
 
-
-
-
-const SecondRoute = () => (
-<View style={{ flex: 1, backgroundColor: '#673ab7' }} />
-);
 
 const renderScene = SceneMap({
-    first: ArtistasResultadoBusqueda,
-    second: SecondRoute,
+    artistas: ArtistasResultadoBusqueda,
+    albumes: AlbunesResultadoBusqueda,
+    tracks: TracksResultadoBusqueda,
 });
-export interface ISearchProps {
+interface ISearchProps {
     musica: any,
     search(text: string): void,
     emptySearch(): void
 }
 
-class Search extends Component<ISearchProps> {
+interface ISearchState {
+    indexTab: number
+}
+
+class Search extends Component<ISearchProps, ISearchState> {
 
     constructor(props: ISearchProps){
         super(props);
+
+        this.state = {
+            indexTab: 0,
+        }
 
         this.searchData = this.searchData.bind(this);
         this.selectCategoria = this.selectCategoria.bind(this);
@@ -43,7 +49,6 @@ class Search extends Component<ISearchProps> {
 
     public searchData(text: string){
         if(!text){ this.props.emptySearch(); return; }
-
         this.props.search(text);
     }
 
@@ -52,7 +57,7 @@ class Search extends Component<ISearchProps> {
     }
 
     public selectCategoria(id: any){
-        console.log(id)
+        this.setState({ indexTab: id })
     }
 
     render() {
@@ -66,18 +71,19 @@ class Search extends Component<ISearchProps> {
                 </View>
                 <View style = { styles.listaResultados }>
                     {this.props.musica &&
-                                        <BarraCategorias 
-                                        handlePress={ this.selectCategoria }
-                                    />
+                        <BarraCategorias 
+                            handlePress={ this.selectCategoria }
+                        />
                     }
 
                 <TabView
-                    navigationState={{ index: 0, routes: [
-                        { key: 'first', title: 'First' },
-                        { key: 'second', title: 'Second' },
+                    navigationState={{ index: this.state.indexTab, routes: [
+                        { key: 'artistas', title: 'Artistas' },
+                        { key: 'albumes', title: 'Albums' },
+                        { key: 'tracks', title: 'Trackas' },
                     ] }}
                     renderScene={renderScene}
-                    onIndexChange={index=>{}}
+                    onIndexChange={this.selectCategoria}
                     renderTabBar={() => null}
                     />
                 </View>

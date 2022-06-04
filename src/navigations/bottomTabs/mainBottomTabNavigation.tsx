@@ -31,27 +31,16 @@ const MainBottomTabNavigation: React.FunctionComponent = () => {
                 activeTintColor: "#FFFFF",
                 inactiveTintColor: "gray",
                 showLabel: false,
-                keyboardHidesTabBar: false,
-                style: {
-                    position: 'absolute',
-                },
+                tabStyle: {
+                    marginBottom: 15
+                }
             }}
         >
             <Tab.Screen
-                component={Home}
-                name='MainBottomTabNavigation.Home'
-                options = {{
-                    tabBarLabel: 'Descubre',
-					tabBarIcon: ({ color, size, focused })=>(
-                        <FIcon name='square' size={20} color={color}   />
-                    )
-				}}
-            />
-            <Tab.Screen
                 component={Buscar}
-                name='MainBottomTabNavigation.Buscar'
+                name='MainBottomTabNavigation.Descubre'
                 options = {{
-					tabBarLabel: 'Buscar',
+					tabBarLabel: 'Descubre',
                     tabBarIcon: ({ color, size, focused })=>(
                         <FIcon name='search' size={20} color={color}   />
                     )
