@@ -68,6 +68,7 @@ class TrackResultadoBusqueda extends Component <ITrackResultadoBusquedaProps>{
                 titulo = { data.name }
                 subtitulo = { data.artists[0].name }
                 nota = { data.album.name }
+                handlePress = {()=>{}}
             />
         )
     }

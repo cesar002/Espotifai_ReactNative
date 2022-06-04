@@ -20,7 +20,7 @@ export interface ILoginLoadingProps {
 }
 
 
-class LoginLoading extends Component <ILoginLoadingProps, {}>{
+class LoginLoading extends Component <ILoginLoadingProps>{
 
     constructor(props: ILoginLoadingProps){
         super(props);

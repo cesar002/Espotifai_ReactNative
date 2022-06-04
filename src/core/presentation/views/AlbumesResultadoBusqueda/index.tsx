@@ -67,6 +67,7 @@ class AlbumesResultadoBusqueda extends Component <IAlbumesResultadoBusquedaProps
                 imageURL={ data?.images[0]?.url ?? '' }
                 titulo = { data.name }
                 subtitulo = { data.artists[0].name }
+                handlePress = {()=>{}}
             />
         )
     }

@@ -9,6 +9,8 @@ import { loadMoreArtistas } from '@redux/slices/searchSlice'
 import styles from './index.syles'
 import Artista from '@core/data/models/Artista';
 import SearchListItem from '@core/presentation/components/SearchListItem';
+import { StackNavigationProp, StackScreenProps } from '@react-navigation/stack';
+import withNavigation from '@core/presentation/hocs/withNavigation';
 
 const {width} = Dimensions.get('window');
 
@@ -17,6 +19,7 @@ interface IArtistasResultadoBusquedaProps {
     next: boolean;
     offset: number;
     loadMoreArtistas(offset: number): void;
+    navigation: StackNavigationProp<any, any>;
 }
 
 class ArtistasResultadoBusqueda extends Component <IArtistasResultadoBusquedaProps>{
@@ -36,6 +39,7 @@ class ArtistasResultadoBusqueda extends Component <IArtistasResultadoBusquedaPro
 
         this.renderRow = this.renderRow.bind(this);
         this.loadMoreArtistas = this.loadMoreArtistas.bind(this);
+        this.goDetalle = this.goDetalle.bind(this);
     }
 
     componentDidUpdate(prevProps: IArtistasResultadoBusquedaProps){
@@ -61,6 +65,7 @@ class ArtistasResultadoBusqueda extends Component <IArtistasResultadoBusquedaPro
             <SearchListItem 
                 imageURL={ data?.images[0]?.url ?? '' }
                 titulo = { data.name }
+                handlePress = {this.goDetalle}
             />
         )
     }
@@ -68,6 +73,10 @@ class ArtistasResultadoBusqueda extends Component <IArtistasResultadoBusquedaPro
     private loadMoreArtistas(){
         if(!this.props.next){ return; }
         this.props.loadMoreArtistas(this.props.offset + 20);
+    }
+
+    private goDetalle(){
+        this.props.navigation.navigate('DescubreNavigation.DetallesArtista');
     }
 
     render() {
@@ -102,4 +111,4 @@ const mapDispatchToProps = {
     loadMoreArtistas,
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(ArtistasResultadoBusqueda)
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(ArtistasResultadoBusqueda))
