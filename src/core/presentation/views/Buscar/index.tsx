@@ -14,7 +14,7 @@ import SearchText from '@core/presentation/components/SearchText';
 import BarraCategorias from '@core/presentation/components/BarraCategorias';
 
 import ArtistasResultadoBusqueda from '@core/presentation/views/ArtistasResultadoBusqueda';
-import AlbunesResultadoBusqueda from '@core/presentation/views/AlbunesResultadoBusqueda';
+import AlbunesResultadoBusqueda from '@core/presentation/views/AlbumesResultadoBusqueda';
 import TracksResultadoBusqueda from '@core/presentation/views/TracksResultadoBusqueda';
 
 
