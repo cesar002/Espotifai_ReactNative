@@ -27,6 +27,10 @@ const LinearGradientView: React.FunctionComponent <ILinearGradientViewProps> = p
             style={[styles.container, { ...props.style }]}
         >
             { props.children }
+            <View style={{
+                height: 55
+            }}>
+            </View>
         </LinearGradient>
     )
 }

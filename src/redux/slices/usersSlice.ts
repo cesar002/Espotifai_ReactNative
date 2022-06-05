@@ -15,14 +15,19 @@ const userSlice = createSlice({
     name: 'users',
     initialState,
     reducers: {
-        addUser(state: IUserState, actions: PayloadAction<User>){
-            state.users = [
-                ...state.users,
-                actions.payload
-            ]
+        setCurrentUser(state: IUserState, action: PayloadAction<User | null>){
+            state.currentUser = action.payload;
+        },
+        addUser(state: IUserState, action: PayloadAction<User | null>){
+            if(action.payload){
+                state.users = [
+                    ...state.users,
+                    action.payload
+                ]
+            }
         },
     }
 })
 
-export const { addUser } = userSlice.actions;
+export const { addUser, setCurrentUser } = userSlice.actions;
 export default userSlice.reducer;

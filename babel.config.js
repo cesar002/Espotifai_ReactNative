@@ -31,6 +31,7 @@ module.exports = {
           '@constants' : './src/constants',
           '@http' : './src/http',
           '@utils' : './src/utils',
+          '@database' : './src/database',
         },
         extensions: [
           '.ios.js',
