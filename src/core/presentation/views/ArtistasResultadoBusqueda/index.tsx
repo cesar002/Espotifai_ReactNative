@@ -6,6 +6,7 @@ import _ from 'lodash';
 
 import { RootState } from '@redux/store';
 import { loadMoreArtistas } from '@redux/slices/searchSlice'
+import { fetchArtista } from '@redux/slices/artistaSlice';
 import styles from './index.syles'
 import Artista from '@core/data/models/Artista';
 import SearchListItem from '@core/presentation/components/SearchListItem';
@@ -18,8 +19,9 @@ interface IArtistasResultadoBusquedaProps {
     artistas: Artista[];
     next: boolean;
     offset: number;
-    loadMoreArtistas(offset: number): void;
     navigation: StackNavigationProp<any, any>;
+    loadMoreArtistas(offset: number): void;
+    fetchArtista(id: string): void;
 }
 
 class ArtistasResultadoBusqueda extends Component <IArtistasResultadoBusquedaProps>{
@@ -65,7 +67,7 @@ class ArtistasResultadoBusqueda extends Component <IArtistasResultadoBusquedaPro
             <SearchListItem 
                 imageURL={ data?.images[0]?.url ?? '' }
                 titulo = { data.name }
-                handlePress = {this.goDetalle}
+                handlePress = {()=>this.goDetalle(data.id)}
             />
         )
     }
@@ -75,7 +77,8 @@ class ArtistasResultadoBusqueda extends Component <IArtistasResultadoBusquedaPro
         this.props.loadMoreArtistas(this.props.offset + 20);
     }
 
-    private goDetalle(){
+    private goDetalle(id: any){
+        this.props.fetchArtista(id);
         this.props.navigation.navigate('DescubreNavigation.DetallesArtista');
     }
 
@@ -108,7 +111,7 @@ const mapStateToProps = (state: RootState) => ({
 })
 
 const mapDispatchToProps = {
-    loadMoreArtistas,
+    loadMoreArtistas, fetchArtista
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(ArtistasResultadoBusqueda))

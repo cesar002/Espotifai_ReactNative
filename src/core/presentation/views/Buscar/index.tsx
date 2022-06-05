@@ -54,6 +54,9 @@ class Search extends Component<ISearchProps, ISearchState> {
 
     public cancelSearch(){
         this.props.emptySearch();
+        this.setState({
+            indexTab: 0,
+        })
     }
 
     public selectCategoria(id: any){

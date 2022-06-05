@@ -7,7 +7,7 @@ interface Album {
     total_tracks: number;
     external_urls: any;
     href: string;
-    images: any;
+    images: any[];
     name: string;
     release_date: any;
     release_date_precision: string;
