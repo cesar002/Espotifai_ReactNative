@@ -8,7 +8,7 @@ const StatusBarApp: React.FC = () => {
         <StatusBar
             barStyle = 'light-content'
             animated
-            backgroundColor = { COLORS.GREEN_LIGHT }
+            backgroundColor = '#90CAF9'
         />
     )
 }

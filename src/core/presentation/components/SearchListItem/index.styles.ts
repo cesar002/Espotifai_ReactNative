@@ -7,7 +7,9 @@ const styles = StyleSheet.create({
         marginVertical: 5,
         flex: 1,
         flexDirection: 'row',
-        paddingVertical: 5
+        paddingVertical: 5,
+        backgroundColor: 'rgba(0,0,0,0.3)',
+        borderRadius: 30,
     },
     imageContainer:{
         flex: 2,
@@ -18,7 +20,7 @@ const styles = StyleSheet.create({
     contentContainer:{
         flex: 5,
         justifyContent: 'space-around',
-        paddingHorizontal: 4,
+        paddingHorizontal: 7,
         paddingVertical: 7,
     },
     image:{
@@ -26,7 +28,21 @@ const styles = StyleSheet.create({
         height: 80,
         resizeMode: 'cover',
         borderRadius: 50,
-    }
+    },
+    textTitulo:{
+        color: 'white',
+        fontSize: 16,
+    },
+    textSubtitulo: {
+        color: 'white',
+        fontSize: 14,
+        marginVertical: 10,
+    },
+    textNota: {
+        color: 'white',
+        fontSize: 12,
+        marginVertical: 10,
+    },
 });
 
 export default styles;

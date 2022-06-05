@@ -3,10 +3,11 @@ import { ISearchAlbum, ISearchArtista, ISearchTrack } from '@core/data/models/Se
 
 
 export interface ISearchState {
-    albums: ISearchAlbum | null,
-    artists: ISearchArtista | null,
-    tracks: ISearchTrack | null,
-    text?: string | null
+    albums: ISearchAlbum | null;
+    artists: ISearchArtista | null;
+    tracks: ISearchTrack | null;
+    text?: string | null;
+    isLoading: boolean;
 }
 
 
@@ -15,6 +16,7 @@ const initialState: ISearchState = {
     artists: null,
     tracks: null,
     text: null,
+    isLoading: false,
 }
 
 const searchSlice = createSlice({
@@ -24,11 +26,14 @@ const searchSlice = createSlice({
         setText(state: ISearchState, action: PayloadAction<string>){
             state.text = action.payload;
         },
-        search(state: ISearchState, action: PayloadAction<string>){},
+        search(state: ISearchState, action: PayloadAction<string>){
+            state.isLoading = true;
+        },
         setSearchResult(state: ISearchState, action: PayloadAction<ISearchState>){
             state.tracks = action.payload.tracks;
             state.albums = action.payload.albums;
             state.artists = action.payload.artists;
+            state.isLoading = false;
         },
         emptySearch(state: ISearchState){
             state.albums = initialState.albums;

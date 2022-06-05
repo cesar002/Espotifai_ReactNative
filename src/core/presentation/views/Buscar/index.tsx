@@ -24,7 +24,8 @@ const renderScene = SceneMap({
     tracks: TracksResultadoBusqueda,
 });
 interface ISearchProps {
-    musica: any,
+    hasData: boolean,
+    isLoading: boolean,
     search(text: string): void,
     emptySearch(): void
 }
@@ -70,12 +71,14 @@ class Search extends Component<ISearchProps, ISearchState> {
                     <SearchText 
                         cancelHandle={ this.cancelSearch }
                         searchHandle={ this.searchData }
+                        isLoading = { this.props.isLoading }
                     />
                 </View>
                 <View style = { styles.listaResultados }>
-                    {this.props.musica &&
+                    {this.props.hasData &&
                         <BarraCategorias 
                             handlePress={ this.selectCategoria }
+                            indexSelected = { this.state.indexTab }
                         />
                     }
 
@@ -96,7 +99,8 @@ class Search extends Component<ISearchProps, ISearchState> {
 }
 
 const mapStateToProps = (state: RootState) => ({
-    musica: state.search.albums
+    hasData: state.search.albums || state.search.artists || state.search.tracks,
+    isLoading: state.search.isLoading,
 });
 
 const mapDispatchToProps = {

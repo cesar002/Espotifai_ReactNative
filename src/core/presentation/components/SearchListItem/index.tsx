@@ -46,9 +46,15 @@ export const SearchListItem: React.FunctionComponent<ISearchListItem> = (props: 
                     />
                 </View>
                 <View style = { styles.contentContainer }>
-                    <Text>{ cutString(props.titulo) }</Text>
-                    <Text>{ cutString(props.subtitulo ?? '') }</Text>
-                    <Text>{ cutString(props.nota ?? '') }</Text>
+                    <Text style = {styles.textTitulo}>
+                        { cutString(props.titulo) }
+                    </Text>
+                    <Text style = {styles.textSubtitulo}>
+                        { cutString(props.subtitulo ?? '') }
+                    </Text>
+                    <Text style = {styles.textNota}>
+                        { cutString(props.nota ?? '') }
+                    </Text>
                 </View>
             </View>
         </TouchableWithoutFeedback>

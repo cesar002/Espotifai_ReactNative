@@ -6,14 +6,15 @@ import styles from './index.styles';
 export interface ICategoriaItemProps {
     titulo: string;
     onPress(): void;
+    isSelected: boolean;
 }
 
 export const CategoriaItem: React.FunctionComponent<ICategoriaItemProps> = (props: ICategoriaItemProps) => (
     <TouchableNativeFeedback
         onPress={props.onPress}
     >
-        <View style = { styles.categoriaItemContainer }>
-            <Text>
+        <View style = { props.isSelected ? styles.categoriaItemContainerSelected : styles.categoriaItemContainer }>
+            <Text style = { props.isSelected ? styles.textSelected : styles.text }>
                 { props.titulo }
             </Text>
         </View>
@@ -22,7 +23,8 @@ export const CategoriaItem: React.FunctionComponent<ICategoriaItemProps> = (prop
 )
 
 export interface IBarraCategoriasProps {
-    handlePress(id: any): void
+    handlePress(id: any): void;
+    indexSelected: number;
 }
 
 const BarraCategorias: React.FunctionComponent <IBarraCategoriasProps> = (props: IBarraCategoriasProps) => {
@@ -41,14 +43,17 @@ const BarraCategorias: React.FunctionComponent <IBarraCategoriasProps> = (props:
                 <CategoriaItem 
                     titulo='Artistas'
                     onPress={()=>pressCategoria(0)}
+                    isSelected = { props.indexSelected == 0 }
                 />
                 <CategoriaItem 
                     titulo='Albunes'
                     onPress={()=>pressCategoria(1)}
+                    isSelected = { props.indexSelected == 1 }
                 />
                 <CategoriaItem 
                     titulo='Canciones'
                     onPress={()=>pressCategoria(2)}
+                    isSelected = { props.indexSelected == 2 }
                 />
             </ScrollView>
         </View>

@@ -2,6 +2,7 @@ import { Text, View } from 'react-native'
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import ParallaxScroll from '@monterosa/react-native-parallax-scroll';
+import LinearGradient from 'react-native-linear-gradient';
 
 import styles from './index.styles'
 import LinearGradientView from '@core/presentation/layouts/LinearGradientView'
@@ -14,6 +15,14 @@ import TopTracksList from '@core/presentation/components/TopTracksList';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { fetchAlbum } from '@redux/slices/albumSlice';
 import { fetchTrack } from '@redux/slices/trackSlice';
+
+const Degradado = [
+    '#2196F3',
+    '#5C6BC0',
+    '#3F51B5',
+    '#283593',
+    '#1A237E',
+]
 
 interface DetallesArtistaProps {
     artista: IArtistaState;
@@ -68,7 +77,7 @@ class DetallesArtista extends Component <DetallesArtistaProps>{
                     parallaxBackgroundScrollSpeed={2}
                     parallaxForegroundScrollSpeed={2.5}
                 >
-                    <View style = { styles.container }>
+                    <LinearGradientView style = { styles.container } colors={Degradado}>
                         {this.props.artista.topTracks &&
                         <TopTracksList 
                             tracks={this.props.artista.topTracks ?? []}
@@ -79,7 +88,7 @@ class DetallesArtista extends Component <DetallesArtistaProps>{
                             albums={this.props.artista.albums?.items ?? []}
                             handlePress={this.goDetalleAlbum}
                         />
-                    </View>
+                    </LinearGradientView>
                 </ParallaxScroll>
             }
         </LinearGradientView>

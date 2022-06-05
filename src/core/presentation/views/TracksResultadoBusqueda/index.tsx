@@ -5,7 +5,7 @@ import { RecyclerListView, DataProvider,  LayoutProvider } from 'recyclerlistvie
 
 import styles from './index.styles';
 
-import { RootState, AppDispatch } from '@redux/store';
+import { RootState } from '@redux/store';
 import Track from '@core/data/models/Track';
 import SearchListItem from '@core/presentation/components/SearchListItem';
 import { loadMoreTracks } from '@redux/slices/searchSlice';

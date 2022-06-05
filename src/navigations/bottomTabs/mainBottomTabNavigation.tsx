@@ -21,13 +21,13 @@ const MainBottomTabNavigation: React.FunctionComponent = () => {
                 shadow: true,
                 dotSize: DotSize.SMALL,
                 dotCornerRadius:100,
-                activeColors: COLORS.GREEN_DEEP_DARK,
-                activeTabBackgrounds: ['#87EAC6', '#87EAC6', '#87EAC6', '#87EAC6'],
-                tabBarBackground: '#FFFFFF',
+                activeColors: '#154360',
+                activeTabBackgrounds: ['#5DADE2', '#5DADE2', '#5DADE2', '#5DADE2'],
+                tabBarBackground: 'white',
                 horizontalPadding: 5,
             }}
             tabBarOptions={{
-                activeTintColor: "#FFFFF",
+                activeTintColor: "#1C2833",
                 inactiveTintColor: "gray",
                 showLabel: false,
                 tabStyle: {
@@ -41,7 +41,7 @@ const MainBottomTabNavigation: React.FunctionComponent = () => {
                 options = {{
 					tabBarLabel: 'Descubre',
                     tabBarIcon: ({ color, size, focused })=>(
-                        <FIcon name='search' size={20} color={color}   />
+                        <FIcon name='search' size={20} color={ color }   />
                     )
 				}}
             />
@@ -51,7 +51,7 @@ const MainBottomTabNavigation: React.FunctionComponent = () => {
                 options = {{
 					tabBarLabel: 'Biblioteca',
                     tabBarIcon: ({ color, size, focused })=>(
-                        <EIcon name='folder-music' size={20} color={color}   />
+                        <EIcon name='folder-music' size={20} color={ color }   />
                     )
 				}}
             />
@@ -61,7 +61,7 @@ const MainBottomTabNavigation: React.FunctionComponent = () => {
                 options = {{
 					tabBarLabel: 'Perfil',
                     tabBarIcon: ({ color, size, focused })=>(
-                        <FIcon name='user' size={20} color={color}   />
+                        <FIcon name='user' size={20} color={ color }   />
                     )
 				}}
             />

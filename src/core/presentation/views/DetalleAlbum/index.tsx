@@ -17,6 +17,14 @@ import withNavigation from '@core/presentation/hocs/withNavigation';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { fetchTrack } from '@redux/slices/trackSlice';
 
+const Degradado = [
+    '#2196F3',
+    '#5C6BC0',
+    '#3F51B5',
+    '#283593',
+    '#1A237E',
+]
+
 interface IDetalleAlbum {
     album: Album;
     tracks: Track[];
@@ -66,21 +74,13 @@ class DetalleAlbum extends Component <IDetalleAlbum>{
                         parallaxBackgroundScrollSpeed={2}
                         parallaxForegroundScrollSpeed={2.5}
                     >
-                        <View style = { styles.container }>
-                            {/* <View>
-                                <View>
-
-                                </View>
-                                <View>
-                                    <Text>{this.props.artista}</Text>
-                                </View>
-                            </View> */}
+                        <LinearGradientView style = { styles.container } colors = { Degradado }>
                             <TracksList 
                                 tracks={this.props.tracks}
                                 handlePress={this.goDetalleTrack}
                                 image={this.props.imagenAlbum}
                             />
-                        </View>
+                        </LinearGradientView>
                     </ParallaxScroll>
                 }
             </LinearGradientView>

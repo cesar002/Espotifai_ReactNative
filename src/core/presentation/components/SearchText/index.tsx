@@ -1,11 +1,12 @@
 import React, { useState } from 'react'
-import { View, Text, TextInput, TouchableWithoutFeedback } from 'react-native'
+import { View, ActivityIndicator, TextInput, TouchableWithoutFeedback } from 'react-native'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AIcon from 'react-native-vector-icons/AntDesign';
 
 import styles from './index.styles';
 
 export interface ISerchTextProps {
+  isLoading: boolean;
   cancelHandle(): void;
   searchHandle(text: string): void;
 }
@@ -37,6 +38,14 @@ const SearchText: React.FunctionComponent<ISerchTextProps> = (props: ISerchTextP
           onChangeText = { onChangeText }
         />
       </View>
+      { props.isLoading && 
+      <View style = { styles.cancelarContainer }>
+        <ActivityIndicator 
+          size={20}
+        />
+    </View>
+      }
+      { !props.isLoading &&
       <TouchableWithoutFeedback
         onPress={ onCancel }
       >
@@ -44,6 +53,7 @@ const SearchText: React.FunctionComponent<ISerchTextProps> = (props: ISerchTextP
             <AIcon name="close" size={20}/>
         </View>
       </TouchableWithoutFeedback>
+      }
     </View>
   )
 }

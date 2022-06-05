@@ -9,6 +9,7 @@ import { RootState } from '@redux/store'
 import { connect } from 'react-redux'
 import Track from '@core/data/models/Track'
 import { IFetchStatus } from '@redux/slices/albumSlice';
+import LinearGradientView from '@core/presentation/layouts/LinearGradientView'
 
 interface IDetallesTrackProps{
     track: Track,
@@ -59,7 +60,7 @@ class DetallesTrack extends Component <IDetallesTrackProps, IDetallesTrackState>
 
     render() {
         return (
-            <View style={styles.container}>
+            <LinearGradientView style={styles.container}>
                 { this.props.status.finish && this.props.status.success && this.props.track &&
                 <>
                 <Text>{this.props.track?.name ?? ''}</Text>
@@ -99,7 +100,7 @@ class DetallesTrack extends Component <IDetallesTrackProps, IDetallesTrackState>
                 </ImageBackground> */}
                 </>
                 }
-            </View>
+            </LinearGradientView>
         )
     }
 }

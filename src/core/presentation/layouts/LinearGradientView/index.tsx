@@ -11,9 +11,19 @@ export interface ILinearGradientViewProps {
     colors?: string[],
 }
 
+const Degradado = [
+    '#90CAF9',
+    '#42A5F5',
+    '#2196F3',
+    '#5C6BC0',
+    '#3F51B5',
+    '#283593',
+    '#1A237E',
+]
+
 const LinearGradientView: React.FunctionComponent <ILinearGradientViewProps> = props => {
     return (
-        <LinearGradient colors={ props.colors? props.colors : [ COLORS.GREEN_LIGHT, COLORS.GREEN, COLORS.GREEN_DARK, COLORS.GREEN_DEEP_DARK ]} 
+        <LinearGradient colors={ props.colors? props.colors : Degradado} 
             style={[styles.container, { ...props.style }]}
         >
             { props.children }
