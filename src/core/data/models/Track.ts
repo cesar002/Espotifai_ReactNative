@@ -6,7 +6,7 @@ interface Track {
     album: Album;
     artists: Artista[];
     disc_number: number;
-    duracion_ms: number;
+    duration_ms: number;
     explicit: boolean;
     external_urls: any;
     href: string;

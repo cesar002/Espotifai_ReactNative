@@ -1,4 +1,5 @@
 import Artista from "./Artista";
+import { ISearchTrack } from "./SearchResult";
 import Track from "./Track";
 
 interface Album {
@@ -14,7 +15,7 @@ interface Album {
     type: string;
     uri: string;
     artists: Artista[];
-    tracks: Track[];
+    tracks: ISearchTrack;
 }
 
 

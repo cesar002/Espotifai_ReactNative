@@ -1,7 +1,7 @@
+import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import Artista from '@core/data/models/Artista'
 import { ISearchAlbum } from '@core/data/models/SearchResult';
 import Track from '@core/data/models/Track';
-import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 interface IFetchStatus{
     start?: boolean;

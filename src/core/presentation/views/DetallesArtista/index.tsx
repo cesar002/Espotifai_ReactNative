@@ -1,4 +1,4 @@
-import { Text, View, ScrollView, Image } from 'react-native'
+import { Text, View } from 'react-native'
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import ParallaxScroll from '@monterosa/react-native-parallax-scroll';
@@ -11,17 +11,27 @@ import AlbumList from '@core/presentation/components/AlbumsList';
 import { IArtistaState } from '@redux/slices/artistaSlice';
 import { RootState } from '@redux/store';
 import TopTracksList from '@core/presentation/components/TopTracksList';
-
+import { StackNavigationProp } from '@react-navigation/stack';
+import { fetchAlbum } from '@redux/slices/albumSlice';
 
 interface DetallesArtistaProps {
     artista: IArtistaState;
     imagenArtista: string;
+    navigation: StackNavigationProp<any, any>;
+    fetchAlbum(id: string): void;
 }
 
 class DetallesArtista extends Component <DetallesArtistaProps>{
 
     constructor(props: DetallesArtistaProps){
         super(props);
+
+        this.goDetalleAlbum = this.goDetalleAlbum.bind(this);
+    }
+
+    private goDetalleAlbum(id: any){
+        this.props.fetchAlbum(id);
+        this.props.navigation.navigate('DescubreNavigation.DetalleAlbum');
     }
 
     render() {
@@ -58,6 +68,7 @@ class DetallesArtista extends Component <DetallesArtistaProps>{
                         }
                         <AlbumList 
                             albums={this.props.artista.albums?.items ?? []}
+                            handlePress={this.goDetalleAlbum}
                         />
                     </View>
                 </ParallaxScroll>
@@ -73,7 +84,7 @@ const mapStateToProps = (state: RootState) => ({
 })
 
 const mapDispatchToProps = {
-
+    fetchAlbum,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetallesArtista)

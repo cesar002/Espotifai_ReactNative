@@ -7,7 +7,7 @@ class AlbumRepositoryImpl implements IAlbumRepository{
 
     public async getAlbum(id: string): Promise<Album> {
         const response = await HttpClient.get(`/albums/${id}`);
-
+        
         const album: Album = response.data;
 
         return album;

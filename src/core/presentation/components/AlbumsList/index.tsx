@@ -6,6 +6,7 @@ import styles from './index.styles';
 
 interface IALbumListProps {
     albums: Album[];
+    handlePress(id: any): void;
 }
 
 const AlbumList: React.FunctionComponent<IALbumListProps>  = (props: IALbumListProps) => {
@@ -14,7 +15,7 @@ const AlbumList: React.FunctionComponent<IALbumListProps>  = (props: IALbumListP
         return (
             <ListItem 
                 key={album.id}
-                handlePress={()=>{}}
+                handlePress={()=>props.handlePress(album.id)}
                 imageURL={album.images.length > 0 ? album.images[0].url : ''}
                 titulo={album.name}
                 sizeImage={70}

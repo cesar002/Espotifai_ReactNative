@@ -4,6 +4,8 @@ import createSagaMiddleware from 'redux-saga';
 import loginSlice from '@redux/slices/loginSlice';
 import searchSlice from '@redux/slices/searchSlice';
 import artistaSlice from '@redux/slices/artistaSlice';
+import trackSlice from '@redux/slices/trackSlice';
+import albumSlice from '@redux/slices/albumSlice';
 import sagas from '@redux/saga';
 
 import SearchRepositoryImpl from '@core/data/repositoriesImpl/SearchRepositoryImpl';
@@ -31,6 +33,8 @@ const store = configureStore({
         login: loginSlice,
         search: searchSlice,
         artista: artistaSlice,
+        track: trackSlice,
+        album: albumSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false

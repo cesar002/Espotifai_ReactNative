@@ -3,6 +3,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import Buscar from "@core/presentation/views/Buscar";
 import DetallesArtista from "@core/presentation/views/DetallesArtista";
+import DetalleAlbum from "@core/presentation/views/DetalleAlbum";
 
 const Stack = createStackNavigator();
 
@@ -20,6 +21,14 @@ const DescubreNavigation: React.FunctionComponent = () => {
             <Stack.Screen 
                 component={ DetallesArtista }
                 name = 'DescubreNavigation.DetallesArtista'
+                options={{
+                    title: '',
+                    headerTransparent: true
+                }}
+            />
+            <Stack.Screen 
+                component={ DetalleAlbum }
+                name = 'DescubreNavigation.DetalleAlbum'
                 options={{
                     title: '',
                     headerTransparent: true

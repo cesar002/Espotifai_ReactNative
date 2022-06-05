@@ -9,6 +9,8 @@ import { RootState, AppDispatch } from '@redux/store'
 import { loadMoreAlbums } from '@redux/slices/searchSlice'
 import Album from '@core/data/models/Album';
 import SearchListItem from '@core/presentation/components/SearchListItem';
+import withNavigation from '@core/presentation/hocs/withNavigation';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const {width} = Dimensions.get('window');
 
@@ -17,6 +19,7 @@ interface IAlbumesResultadoBusquedaProps {
     albumes: Album[];
     next: boolean;
     offset: number;
+    navigation: StackNavigationProp<any, any>;
     loadMoreAlbums(offset: number): void;
 }
 
@@ -36,6 +39,7 @@ class AlbumesResultadoBusqueda extends Component <IAlbumesResultadoBusquedaProps
         this.layoutProvider.shouldRefreshWithAnchoring = false;
 
         this.loadMoreAlbumes = this.loadMoreAlbumes.bind(this);
+        this.goDetalle = this.goDetalle.bind(this);
     }
 
     componentDidUpdate(prevProps: IAlbumesResultadoBusquedaProps){
@@ -67,9 +71,14 @@ class AlbumesResultadoBusqueda extends Component <IAlbumesResultadoBusquedaProps
                 imageURL={ data?.images[0]?.url ?? '' }
                 titulo = { data.name }
                 subtitulo = { data.artists[0].name }
-                handlePress = {()=>{}}
+                handlePress = {()=>this.goDetalle(data.id)}
             />
         )
+    }
+
+    private goDetalle(id: any){
+        //this.props.fetchArtista(id);
+        this.props.navigation.navigate('DescubreNavigation.DetalleAlbum');
     }
 
     render() {
@@ -107,4 +116,4 @@ const mapDispatchToProps = (dispatch: AppDispatch) => ({
     },
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AlbumesResultadoBusqueda)
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(AlbumesResultadoBusqueda))

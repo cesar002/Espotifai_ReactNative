@@ -2,7 +2,7 @@ import { call, takeLatest, put, getContext } from 'redux-saga/effects';
 
 import Artista from '@core/data/models/Artista';
 import { ISearchAlbum } from '@core/data/models/SearchResult';
-import { IArtistaState, setArtista, setStatus } from '@redux/slices/artistaSlice';
+import { setArtista, setStatus } from '@redux/slices/artistaSlice';
 import Track from '@core/data/models/Track';
 
 function* fetchArtista(action: any){
@@ -10,7 +10,7 @@ function* fetchArtista(action: any){
         const albumRepository = yield getContext('albumRepository');
         const artistaRepository = yield getContext('artistaRepository');
         const trackRepository = yield getContext('trackRepository');
-        console.log(action.payload);
+
         const artista: Artista = yield call(artistaRepository.getArtista, action.payload);
         const albums: ISearchAlbum = yield call(albumRepository.getAlbumsByArtistaId, action.payload);
         const topTracks: Track[] = yield call(trackRepository.getTopTracksArtista, action.payload);
