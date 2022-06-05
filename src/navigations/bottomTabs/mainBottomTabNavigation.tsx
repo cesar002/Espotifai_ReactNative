@@ -3,7 +3,7 @@ import { AnimatedTabBarNavigator, DotSize } from "react-native-animated-nav-tab-
 import FIcon from 'react-native-vector-icons/FontAwesome';
 import EIcon from 'react-native-vector-icons/Entypo';
 
-import Perfil from '@core/presentation/views/Perfil';
+import Perfil from '@navigations/stacks/perfilNavigation';
 import Buscar from '@navigations/stacks/descubreNavigation';
 import Biblioteca from '@core/presentation/views/Biblioteca';
 

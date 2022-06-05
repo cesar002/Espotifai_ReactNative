@@ -6,6 +6,7 @@ import searchSlice from '@redux/slices/searchSlice';
 import artistaSlice from '@redux/slices/artistaSlice';
 import trackSlice from '@redux/slices/trackSlice';
 import albumSlice from '@redux/slices/albumSlice';
+import userSlice from '@redux/slices/usersSlice';
 import sagas from '@redux/saga';
 
 import SearchRepositoryImpl from '@core/data/repositoriesImpl/SearchRepositoryImpl';
@@ -35,6 +36,7 @@ const store = configureStore({
         artista: artistaSlice,
         track: trackSlice,
         album: albumSlice,
+        user: userSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false
