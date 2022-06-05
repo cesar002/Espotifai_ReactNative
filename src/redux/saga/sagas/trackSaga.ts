@@ -8,7 +8,7 @@ function* fetchTrack(action: any){
         const trackRepository = yield getContext('trackRepository');
 
         const track: Track = yield call(trackRepository.getTrack, action.payload);
-
+        
         yield put(setTrack({
             track
         }));

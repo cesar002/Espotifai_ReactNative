@@ -13,12 +13,14 @@ import { RootState } from '@redux/store';
 import TopTracksList from '@core/presentation/components/TopTracksList';
 import { StackNavigationProp } from '@react-navigation/stack';
 import { fetchAlbum } from '@redux/slices/albumSlice';
+import { fetchTrack } from '@redux/slices/trackSlice';
 
 interface DetallesArtistaProps {
     artista: IArtistaState;
     imagenArtista: string;
     navigation: StackNavigationProp<any, any>;
     fetchAlbum(id: string): void;
+    fetchTrack(id: string): void;
 }
 
 class DetallesArtista extends Component <DetallesArtistaProps>{
@@ -27,11 +29,17 @@ class DetallesArtista extends Component <DetallesArtistaProps>{
         super(props);
 
         this.goDetalleAlbum = this.goDetalleAlbum.bind(this);
+        this.goDetalleTrack = this.goDetalleTrack.bind(this);
     }
 
     private goDetalleAlbum(id: any){
         this.props.fetchAlbum(id);
         this.props.navigation.navigate('DescubreNavigation.DetalleAlbum');
+    }
+
+    private goDetalleTrack(id: any){
+        this.props.fetchTrack(id);
+        this.props.navigation.navigate('DescubreNavigation.DetallesTrack');
     }
 
     render() {
@@ -64,6 +72,7 @@ class DetallesArtista extends Component <DetallesArtistaProps>{
                         {this.props.artista.topTracks &&
                         <TopTracksList 
                             tracks={this.props.artista.topTracks ?? []}
+                            handlePress={this.goDetalleTrack}
                         />
                         }
                         <AlbumList 
@@ -84,7 +93,7 @@ const mapStateToProps = (state: RootState) => ({
 })
 
 const mapDispatchToProps = {
-    fetchAlbum,
+    fetchAlbum, fetchTrack,
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(DetallesArtista)

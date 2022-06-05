@@ -10,7 +10,7 @@ interface Album {
     href: string;
     images: any[];
     name: string;
-    release_date: any;
+    release_date: string;
     release_date_precision: string;
     type: string;
     uri: string;

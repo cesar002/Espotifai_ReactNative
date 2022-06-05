@@ -4,6 +4,7 @@ import { setAlbum, setStatus } from '@redux/slices/albumSlice';
 
 function* fetchAlbum(action: any){
     try {
+        console.log(action.payload);
         const albumRepository = yield getContext('albumRepository');
 
         const album: Album = yield call(albumRepository.getAlbum, action.payload);

@@ -8,10 +8,14 @@ import { RootState } from '@redux/store'
 import LinearGradientView from '@core/presentation/layouts/LinearGradientView'
 import BannerTitulo from '@core/presentation/components/BannerTitulo';
 import Loading from '@core/presentation/components/LoadingScreen';
+import ListItem from '@core/presentation/components/SearchListItem';
 import { IAlbumState, IFetchStatus } from '@redux/slices/albumSlice';
 import TracksList from '@core/presentation/components/TracksList';
 import Album from '@core/data/models/Album';
 import Track from '@core/data/models/Track';
+import withNavigation from '@core/presentation/hocs/withNavigation';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { fetchTrack } from '@redux/slices/trackSlice';
 
 interface IDetalleAlbum {
     album: Album;
@@ -19,6 +23,8 @@ interface IDetalleAlbum {
     status: IFetchStatus;
     imagenAlbum: string;
     artista: string;
+    navigation: StackNavigationProp<any, any>;
+    fetchTrack(id: string): void;
 }
 
 class DetalleAlbum extends Component <IDetalleAlbum>{
@@ -29,9 +35,10 @@ class DetalleAlbum extends Component <IDetalleAlbum>{
         this.goDetalleTrack = this.goDetalleTrack.bind(this);
     }
 
+
     private goDetalleTrack(id: any){
-        //this.props.fetchAlbum(id);
-        //this.props.navigation.navigate('DescubreNavigation.DetalleAlbum');
+        this.props.fetchTrack(id);
+        this.props.navigation.navigate('DescubreNavigation.DetallesTrack');
     }
 
     render() {
@@ -60,6 +67,14 @@ class DetalleAlbum extends Component <IDetalleAlbum>{
                         parallaxForegroundScrollSpeed={2.5}
                     >
                         <View style = { styles.container }>
+                            {/* <View>
+                                <View>
+
+                                </View>
+                                <View>
+                                    <Text>{this.props.artista}</Text>
+                                </View>
+                            </View> */}
                             <TracksList 
                                 tracks={this.props.tracks}
                                 handlePress={this.goDetalleTrack}
@@ -81,4 +96,8 @@ const mapStateToProps = (state: RootState) => ({
     artista: state.album.album?.artists.length ? state.album.album.artists[0].name : '',
 });
 
-export default connect(mapStateToProps, null)(DetalleAlbum)
+const mapDispatchToProps = {
+    fetchTrack
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(DetalleAlbum))

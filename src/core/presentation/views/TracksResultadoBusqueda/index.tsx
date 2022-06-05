@@ -9,6 +9,9 @@ import { RootState, AppDispatch } from '@redux/store';
 import Track from '@core/data/models/Track';
 import SearchListItem from '@core/presentation/components/SearchListItem';
 import { loadMoreTracks } from '@redux/slices/searchSlice';
+import { fetchTrack } from '@redux/slices/trackSlice';
+import withNavigation from '@core/presentation/hocs/withNavigation';
+import { StackNavigationProp } from '@react-navigation/stack';
 
 const {width} = Dimensions.get('window');
 
@@ -16,6 +19,8 @@ interface ITrackResultadoBusquedaProps {
     tracks: Track[];
     next: boolean;
     offset: number;
+    navigation: StackNavigationProp<any, any>;
+    fetchTrack(id: string): void;
     loadMoreTracks(offset: number): void;
 }
 
@@ -36,6 +41,8 @@ class TrackResultadoBusqueda extends Component <ITrackResultadoBusquedaProps>{
         this.layoutProvider.shouldRefreshWithAnchoring = false;
 
         this.loadMoreTracks = this.loadMoreTracks.bind(this);
+        this.goDetalleTrack = this.goDetalleTrack.bind(this);
+        this.renderRow = this.renderRow.bind(this);
     }
 
     componentDidUpdate(prevProps: ITrackResultadoBusquedaProps){
@@ -61,16 +68,21 @@ class TrackResultadoBusqueda extends Component <ITrackResultadoBusquedaProps>{
         this.props.loadMoreTracks(this.props.offset + 20);
     }
 
-    private renderRow(type: any, data: Track) {
+    private renderRow(type: any, track: Track) {
         return(
             <SearchListItem 
-                imageURL={ data.album.images[0].url ?? data.artists[0].images[0].url ?? '' }
-                titulo = { data.name }
-                subtitulo = { data.artists[0].name }
-                nota = { data.album.name }
-                handlePress = {()=>{}}
+                imageURL={ track.album.images[0].url ?? track.artists[0].images[0].url ?? '' }
+                titulo = { track.name }
+                subtitulo = { track.artists[0].name }
+                nota = { track.album.name }
+                handlePress = {()=>this.goDetalleTrack(track.id)}
             />
         )
+    }
+
+    private goDetalleTrack(id: any){
+        this.props.fetchTrack(id);
+        this.props.navigation.navigate('DescubreNavigation.DetallesTrack');
     }
     
     render() {
@@ -101,10 +113,8 @@ const mapStateToProps = (state: RootState)=>({
     next: state.search.tracks?.next ? true : false,
 })
 
-const mapDispatchToProps = (dispatch: AppDispatch) => ({
-    loadMoreTracks(offset: number){
-        dispatch(loadMoreTracks(offset))
-    }
-})
+const mapDispatchToProps = {
+    loadMoreTracks, fetchTrack
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackResultadoBusqueda)
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(TrackResultadoBusqueda))

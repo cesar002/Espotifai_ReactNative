@@ -10,7 +10,7 @@ export interface ISearchListItem {
     titulo: string;
     subtitulo?: string;
     nota?: string;
-    sizeImage?: number,
+    sizeImage?: number;
     handlePress(): void;
     typeImage?: 'SQUARE' | 'CIRCLE',
 }

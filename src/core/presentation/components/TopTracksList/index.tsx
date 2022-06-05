@@ -7,6 +7,7 @@ import styles from './index.styles';
 
 interface ITopTracksListProps {
     tracks: Track[];
+    handlePress(id: string): void;
 }
 
 const TopTracksList: React.FunctionComponent<ITopTracksListProps> = (props: ITopTracksListProps) => {
@@ -16,7 +17,7 @@ const TopTracksList: React.FunctionComponent<ITopTracksListProps> = (props: ITop
         return (
             <ListItem 
                 key={track.id}
-                handlePress={()=>{}}
+                handlePress={()=>props.handlePress(track.id)}
                 imageURL={images.length > 0 ? images[0].url : ''}
                 titulo={track.name}
                 subtitulo={track.album.name}

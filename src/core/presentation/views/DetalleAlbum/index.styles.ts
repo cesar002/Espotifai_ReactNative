@@ -6,6 +6,10 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         paddingHorizontal: 10,
         paddingVertical: 20,
+    },
+    artistaContainer: {
+        flex: 1,
+        marginVertical: 5,
     }
 });
 

@@ -10,6 +10,7 @@ export interface IFetchStatus{
 
 export interface IAlbumState {
     album: Album | null;
+    
     status: IFetchStatus;
 }
 

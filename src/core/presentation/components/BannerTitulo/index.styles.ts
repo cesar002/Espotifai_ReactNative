@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
         textAlign: 'center',
     },
     subTitulo: {
-        fontSize: 15,
+        fontSize: 20,
         textAlign: 'center',
         zIndex: 1,
         color: 'white',

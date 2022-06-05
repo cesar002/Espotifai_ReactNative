@@ -1,5 +1,6 @@
 import { View, Text } from 'react-native'
 import React from 'react'
+import moment from 'moment'
 import Album from '@core/data/models/Album'
 import ListItem from '@core/presentation/components/SearchListItem';
 import styles from './index.styles';
@@ -18,6 +19,8 @@ const AlbumList: React.FunctionComponent<IALbumListProps>  = (props: IALbumListP
                 handlePress={()=>props.handlePress(album.id)}
                 imageURL={album.images.length > 0 ? album.images[0].url : ''}
                 titulo={album.name}
+                subtitulo={`${moment(album.release_date).format('L')}`}
+                nota={`Canciones: ${album.total_tracks.toString()}`}
                 sizeImage={70}
                 typeImage='SQUARE'
             />

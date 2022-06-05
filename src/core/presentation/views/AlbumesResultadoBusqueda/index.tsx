@@ -5,8 +5,9 @@ import { RecyclerListView, DataProvider,  LayoutProvider } from 'recyclerlistvie
 import _ from 'lodash';
 
 import styles from './index.styles'
-import { RootState, AppDispatch } from '@redux/store'
+import { RootState } from '@redux/store'
 import { loadMoreAlbums } from '@redux/slices/searchSlice'
+import { fetchAlbum } from '@redux/slices/albumSlice'
 import Album from '@core/data/models/Album';
 import SearchListItem from '@core/presentation/components/SearchListItem';
 import withNavigation from '@core/presentation/hocs/withNavigation';
@@ -21,6 +22,7 @@ interface IAlbumesResultadoBusquedaProps {
     offset: number;
     navigation: StackNavigationProp<any, any>;
     loadMoreAlbums(offset: number): void;
+    fetchAlbum(id: string): void;
 }
 
 class AlbumesResultadoBusqueda extends Component <IAlbumesResultadoBusquedaProps>{
@@ -40,6 +42,7 @@ class AlbumesResultadoBusqueda extends Component <IAlbumesResultadoBusquedaProps
 
         this.loadMoreAlbumes = this.loadMoreAlbumes.bind(this);
         this.goDetalle = this.goDetalle.bind(this);
+        this.renderRow = this.renderRow.bind(this);
     }
 
     componentDidUpdate(prevProps: IAlbumesResultadoBusquedaProps){
@@ -76,8 +79,8 @@ class AlbumesResultadoBusqueda extends Component <IAlbumesResultadoBusquedaProps
         )
     }
 
-    private goDetalle(id: any){
-        //this.props.fetchArtista(id);
+    private goDetalle(id: string){
+        this.props.fetchAlbum(id);
         this.props.navigation.navigate('DescubreNavigation.DetalleAlbum');
     }
 
@@ -110,10 +113,8 @@ const mapStateToProps = (state: RootState)=>({
     next: state.search.albums?.next ? true : false,
 })
 
-const mapDispatchToProps = (dispatch: AppDispatch) => ({
-    loadMoreAlbums(offset: number){
-        dispatch(loadMoreAlbums(offset))
-    },
-})
+const mapDispatchToProps = {
+    loadMoreAlbums, fetchAlbum
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(withNavigation(AlbumesResultadoBusqueda))
