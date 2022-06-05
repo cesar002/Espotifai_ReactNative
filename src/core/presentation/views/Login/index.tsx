@@ -96,13 +96,13 @@ class Login extends Component <ILoginProps> {
                   <Boton 
                     text='Iniciar sesión'
                     handlePress={handleSubmit}
+                    isLoading={isSubmitting}
                   />
                   <Boton 
                     text='Registrarse'
                     handlePress={()=>{
                       this.props.navigation.navigate('PerfilNavigation.Registrar')
                     }}
-                    isLoading={isSubmitting}
                   />
                 </View>
             </View>

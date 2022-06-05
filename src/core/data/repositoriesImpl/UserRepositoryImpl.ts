@@ -16,6 +16,7 @@ class UserRepositoryImpl implements IUserRepository {
 
     public async createUser(user: User): Promise<User | undefined> {
         return new Promise((resolve, reject) =>{
+            user.favoritos = [];
             resolve(user);
         });
     }
