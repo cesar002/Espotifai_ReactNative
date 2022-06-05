@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     contentContainer:{
         flex: 5,
         justifyContent: 'space-around',
-        paddingHorizontal: 7,
+        paddingHorizontal: 10,
         paddingVertical: 7,
     },
     image:{

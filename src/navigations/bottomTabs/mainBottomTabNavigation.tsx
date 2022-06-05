@@ -5,7 +5,7 @@ import EIcon from 'react-native-vector-icons/Entypo';
 
 import Perfil from '@navigations/stacks/perfilNavigation';
 import Buscar from '@navigations/stacks/descubreNavigation';
-import Biblioteca from '@core/presentation/views/Biblioteca';
+import Favoritos from '@core/presentation/views/Favoritos';
 
 import COLORS from '@constants/colors';
 
@@ -46,10 +46,10 @@ const MainBottomTabNavigation: React.FunctionComponent = () => {
 				}}
             />
             <Tab.Screen
-                component={Biblioteca}
-                name='MainBottomTabNavigation.Biblioteca'
+                component={Favoritos}
+                name='MainBottomTabNavigation.Favoritos'
                 options = {{
-					tabBarLabel: 'Biblioteca',
+					tabBarLabel: 'Favoritos',
                     tabBarIcon: ({ color, size, focused })=>(
                         <EIcon name='folder-music' size={20} color={ color }   />
                     )

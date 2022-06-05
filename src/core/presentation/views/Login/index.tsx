@@ -38,8 +38,6 @@ class Login extends Component <ILoginProps> {
       await authServide.loginUser(user)
     } catch (error) {
       console.error(error)
-    }finally{
-      helpers.setSubmitting(false);
     }
   }
 
@@ -96,7 +94,6 @@ class Login extends Component <ILoginProps> {
                   <Boton 
                     text='Iniciar sesión'
                     handlePress={handleSubmit}
-                    isLoading={isSubmitting}
                   />
                   <Boton 
                     text='Registrarse'

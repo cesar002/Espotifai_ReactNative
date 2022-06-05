@@ -17,7 +17,7 @@ class AuthService implements IAuthService{
     public async loginUser(user: User): Promise<void> {
         return new Promise(async (resolve)=>{
             const _user = await this.userRepository.getUser(user.email);
-
+            console.log(_user)
             if( _user?.password !== user.password){
                 throw 'Las credenciales no son correctas';
             }
