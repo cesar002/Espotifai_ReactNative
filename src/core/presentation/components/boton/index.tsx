@@ -7,6 +7,7 @@ interface IBotonProps {
     text: string;
     isLoading?: boolean;
     handlePress(): void;
+    color?: string;
 }
 
 const Boton: React.FunctionComponent<IBotonProps> = (props: IBotonProps) => {
@@ -15,7 +16,7 @@ const Boton: React.FunctionComponent<IBotonProps> = (props: IBotonProps) => {
             onPress={props.handlePress}
             disabled={props.isLoading}
         >
-            <View style={styles.container}>
+            <View style={[styles.container, props.color ? {backgroundColor: props.color} : {}]}>
                 { props.isLoading && 
                 <ActivityIndicator 
                     color='white'

@@ -15,21 +15,34 @@ class AuthService implements IAuthService{
     }
 
     public async loginUser(user: User): Promise<void> {
-        
-        const _user = await this.userRepository.getUser(user.email);
+        return new Promise(async (resolve)=>{
+            const _user = await this.userRepository.getUser(user.email);
 
-        store.dispatch(setCurrentUser(_user));
-        
+            console.log(user)
+
+            if( _user?.password !== user.password){
+                throw 'Las credenciales no son correctas';
+            }
+
+            store.dispatch(setCurrentUser(_user ? _user : null));
+
+            resolve();
+        })
     }
     public async registerUser(user: User): Promise<void> {
-        let _user = await this.userRepository.getUser(user.email);
-        if(_user){
-            throw 'El usuario ya éxiste';
-        }
-        
-        _user = await this.userRepository.createUser(user);
+        return new Promise(async (resolve)=>{
+            let _user = await this.userRepository.getUser(user.email);
+            if(_user){
+                throw 'El usuario ya éxiste';
+            }
+            
+            _user = await this.userRepository.createUser(user);
 
-        store.dispatch(addUser(_user));
+            store.dispatch(addUser(_user ? _user : null));
+            store.dispatch(setCurrentUser(_user ? _user : null));
+
+            resolve();
+        })
     }
 
 }

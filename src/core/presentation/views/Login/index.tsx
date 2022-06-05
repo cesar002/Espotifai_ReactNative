@@ -2,10 +2,14 @@ import { Text, View, ScrollView } from 'react-native'
 import React, { Component } from 'react'
 import LinearGradientView from '@core/presentation/layouts/LinearGradientView'
 import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 import styles from './index.styles'
 import InputText from '@core/presentation/components/InputText'
 import Boton from '@core/presentation/components/boton'
+import AuthService from '@core/domain/useCases/AuthService';
+import UserRepositoryImpl from '@core/data/repositoriesImpl/UserRepositoryImpl';
+import User from '@core/data/models/User';
 import { StackNavigationProp } from '@react-navigation/stack';
 
 interface ILoginProps{
@@ -16,6 +20,27 @@ class Login extends Component <ILoginProps> {
 
   constructor(props: ILoginProps){
     super(props);
+
+    this.login = this.login.bind(this);
+  }
+
+
+  async login(values: any, helpers: any){
+    try {
+      const user: User = {
+        nombre: values.nombre,
+        apellido: values.apellido,
+        email: values.email,
+        password: values.password,
+      }
+
+      const authServide = new AuthService( new UserRepositoryImpl());
+      await authServide.loginUser(user)
+    } catch (error) {
+      console.error(error)
+    }finally{
+      helpers.setSubmitting(false);
+    }
   }
 
   render() {
@@ -31,24 +56,12 @@ class Login extends Component <ILoginProps> {
             </Text>
           </View>
           <Formik
-            validate={(values)=>{
-              const errors = {
-                  email: '',
-                  password: '',
-              };
-
-              if(!values.email){
-                errors.email='Campo obligatorio';
-              }
-
-              if(!values.password){
-                errors.password='Campo obligatorio'
-              }
-
-              return errors;
-            }}
+            validationSchema={ Yup.object().shape({
+                email: Yup.string().email('El campo debe ser un email').required('Campo requerido'),
+                password: Yup.string().required('El campo es requerido'),
+            })}
             initialValues={ { email: '', password: '' } }
-            onSubmit={(values) => console.log(values)}
+            onSubmit={(values, helpers) => this.login(values, helpers)}
           >
             {
               ({
@@ -68,7 +81,7 @@ class Login extends Component <ILoginProps> {
                   error={errors.email}
                   value={values.email}
                   onChangeText={handleChange('email')}
-                  onBlur={handleBlur('password')}
+                  onBlur={handleBlur('email')}
                 />
                 <InputText 
                   label='Contraseña'
@@ -89,6 +102,7 @@ class Login extends Component <ILoginProps> {
                     handlePress={()=>{
                       this.props.navigation.navigate('PerfilNavigation.Registrar')
                     }}
+                    isLoading={isSubmitting}
                   />
                 </View>
             </View>

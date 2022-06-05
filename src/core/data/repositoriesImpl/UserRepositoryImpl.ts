@@ -1,27 +1,23 @@
 import IUserRepository from "@core/domain/repositories/IUserRepository";
-import { DataSource } from "typeorm";
+import store, { RootState } from '@redux/store';
+import { addUser } from '@redux/slices/usersSlice';
 import User from "../models/User";
 
 class UserRepositoryImpl implements IUserRepository {
 
-    public dbConnection: DataSource;
+    public async getUser(email: string): Promise<User | undefined> {
+        return new Promise((resolve, reject) =>{
+            const state: RootState = store.getState();
+            const user = state.user.users.find((u: User) => u.email == email);
 
-    constructor(dbConnection: DataSource){
-        this.dbConnection = dbConnection;
+            resolve(user);
+        });
     }
 
-    public async getUser(email: string): Promise<User | null> {
-        const user = await this.dbConnection.manager.findOneBy(User, {
-            email: email,
-        })
-
-        return user;
-    }
-
-    public async createUser(user: User): Promise<User | null> {
-        const _user = await this.dbConnection.manager.save(user);
-
-        return _user;
+    public async createUser(user: User): Promise<User | undefined> {
+        return new Promise((resolve, reject) =>{
+            resolve(user);
+        });
     }
     
 }

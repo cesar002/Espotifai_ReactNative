@@ -1,6 +1,6 @@
 import { Text, View, ScrollView } from 'react-native'
 import React, { Component } from 'react'
-import { Formik, FormikHelpers } from 'formik';
+import { Formik } from 'formik';
 import * as Yup from 'yup';
 
 import InputText from '@core/presentation/components/InputText'
@@ -11,34 +11,29 @@ import LinearGradientView from '@core/presentation/layouts/LinearGradientView'
 import styles from './index.styles';
 import AuthService from '@core/domain/useCases/AuthService';
 import UserRepositoryImpl from '@core/data/repositoriesImpl/UserRepositoryImpl';
-import DataBaseConnection from '@database/DataBaseConnection';
 import User from '@core/data/models/User';
 
 class RegistrarUsuarios extends Component <{}>{
 
-    public authServide: AuthService;
-
     constructor(props){
         super(props);
-
-        this.authServide = new AuthService(
-            new UserRepositoryImpl(DataBaseConnection.getConnection())
-        );
 
         this.registrarUsuario = this.registrarUsuario.bind(this);
     }
 
     async registrarUsuario(values: any, helpers){
         try {
-            const user = new User();
-            user.nombre = values.nombre;
-            user.apellido = values.apellido;
-            user.email = values.email;
-            user.password = values.password;
+            const user: User = {
+                nombre: values.nombre,
+                apellido: values.apellido,
+                email: values.email,
+                password: values.password,
+            }
 
-            await this.authServide.registerUser(user);
+            const authServide = new AuthService( new UserRepositoryImpl());
+            await authServide.registerUser(user);
         } catch (error) {
-            
+            console.error(error)
         }
     }
 

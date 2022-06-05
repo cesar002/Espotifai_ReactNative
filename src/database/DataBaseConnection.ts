@@ -9,7 +9,7 @@ class DataBaseConnection {
             type: "sqlite",
             database: "test",
             logging: true,
-            entities: [ User, Favorito ],
+            //entities: [ User, Favorito ],
         })
 
         return dataSource;
