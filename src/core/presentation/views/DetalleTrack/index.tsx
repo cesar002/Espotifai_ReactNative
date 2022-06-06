@@ -51,22 +51,21 @@ class DetallesTrack extends Component <IDetallesTrackProps, IDetallesTrackState>
     }
 
     private playTrack(){
-        try {
-            const isPlay = this.state.isPlaySong;
-            SoundPlayer.getInfo().then(data => {
-                console.log(data);
-            });
-            if(!isPlay){
-                SoundPlayer.playUrl(this.props.track.preview_url)
-            }else{
-                SoundPlayer.pause();
+        if(this.props.track && this.props.track.preview_url ){
+            try {
+                const isPlay = this.state.isPlaySong;
+                if(!isPlay){
+                    SoundPlayer.playUrl(this.props.track.preview_url)
+                }else{
+                    SoundPlayer.pause();
+                }
+    
+                this.setState({
+                    isPlaySong: !isPlay
+                })
+            } catch (error) {
+                console.error(error)
             }
-
-            this.setState({
-                isPlaySong: !isPlay
-            })
-        } catch (error) {
-            console.error(error)
         }
     }
 
@@ -77,24 +76,32 @@ class DetallesTrack extends Component <IDetallesTrackProps, IDetallesTrackState>
     }
 
     public addToFav(){
-        const favorito: Favorito = {
-            id: this.props.track.id,
-            image: this.props.imagen,
-            nombre: this.props.track.name,
-            type: 'TRACK'
-        };
-
-        this.props.addFavorito({
-            userId: this.props.user.email,
-            favorito,
-        })
+        try {
+            const favorito: Favorito = {
+                id: this.props.track.id,
+                image: this.props.imagen,
+                nombre: this.props.track.name,
+                type: 'TRACK'
+            };
+    
+            this.props.addFavorito({
+                userId: this.props.user.email,
+                favorito,
+            })
+        } catch (error) {
+            
+        }
     }
 
     public removeToFav(){
-        this.props.removeFavorito({
-            email: this.props.user.email,
-            favId: this.props.track.id,
-        })
+        try {
+            this.props.removeFavorito({
+                email: this.props.user.email,
+                favId: this.props.track.id,
+            })
+        } catch (error) {
+            
+        }
     }
 
     render() {
@@ -106,14 +113,15 @@ class DetallesTrack extends Component <IDetallesTrackProps, IDetallesTrackState>
                     {this.props.track?.name ?? ''}
                 </Text>
                 <View style={{
-                    width: 350,
-                    height: 350,
+                    width: 280,
+                    height: 280,
                     borderRadius: 300,
                     overflow: 'hidden',          
                 }}>
                     <ImageBackground style={styles.imagenMusic}
                         source={{ uri: this.props.imagen ? this.props.imagen : DEFAULT_IMAGEN }}
                     >
+                        { this.props.track.preview_url && 
                         <TouchableWithoutFeedback
                             onPress={this.playTrack}
                         >
@@ -125,6 +133,8 @@ class DetallesTrack extends Component <IDetallesTrackProps, IDetallesTrackState>
                                 />
                             </View>
                         </TouchableWithoutFeedback>
+                        }
+
                     </ImageBackground>
                 </View>
                 <View style={styles.contentFav}>
@@ -155,6 +165,9 @@ class DetallesTrack extends Component <IDetallesTrackProps, IDetallesTrackState>
                     </Text>
                     <Text style={styles.textAlbum}>
                         {this.props.track.album.name}
+                    </Text>
+                    <Text style={styles.textNoDisponible}>
+                        Canción no disponible
                     </Text>
                 </View>
                 </>

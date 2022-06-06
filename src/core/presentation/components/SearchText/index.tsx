@@ -28,7 +28,7 @@ const SearchText: React.FunctionComponent<ISerchTextProps> = (props: ISerchTextP
   return (
     <View style = { styles.container }>
       <View style={styles.iconoContainer}>
-        <Icon name='search' size={15} />
+        <Icon name='search' color='#424949' size={15} />
       </View>
       <View style={styles.textContainer}>
         <TextInput 
@@ -50,7 +50,7 @@ const SearchText: React.FunctionComponent<ISerchTextProps> = (props: ISerchTextP
         onPress={ onCancel }
       >
         <View style = { styles.cancelarContainer }>
-            <AIcon name="close" size={20}/>
+            <AIcon name="close" size={20} color='#424949' />
         </View>
       </TouchableWithoutFeedback>
       }

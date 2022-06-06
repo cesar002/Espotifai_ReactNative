@@ -39,6 +39,7 @@ const BarraCategorias: React.FunctionComponent <IBarraCategoriasProps> = (props:
                 horizontal
                 style = { styles.scrollView }
                 contentContainerStyle = { styles.scrollViewContent }
+                showsHorizontalScrollIndicator = { false }
             >
                 <CategoriaItem 
                     titulo='Artistas'

@@ -55,7 +55,11 @@ const styles = StyleSheet.create({
     textAlbum: {
         color: 'white',
         fontSize: 20,
-    }
+    },
+    textNoDisponible: {
+        color: 'white',
+        fontSize: 18,
+    },
 });
 
 export default styles;

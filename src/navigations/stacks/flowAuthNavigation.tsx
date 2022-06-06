@@ -23,9 +23,7 @@ const FlowAuthNavigation = () => {
         NetInfo.addEventListener((state)=>{
             if(state.isConnected){
                 dispatch(setConnected())
-                console.log('conectado')
             }else{
-                console.log('desconectado')
                 dispatch(setDisconnected())
             }
         })

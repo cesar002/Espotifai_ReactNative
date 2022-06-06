@@ -12,6 +12,7 @@ const styles = StyleSheet.create({
     textInput: {
         width: '100%',
         height: '100%',
+        color: '#424949'
     },
     iconoContainer: {
         flex: 0.8,

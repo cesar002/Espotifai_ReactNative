@@ -31,7 +31,8 @@ const MainBottomTabNavigation: React.FunctionComponent = () => {
                 inactiveTintColor: "gray",
                 showLabel: false,
                 tabStyle: {
-                    marginBottom: 15
+                    marginBottom: 15,
+                    backgroundColor: 'white',
                 }
             }}
         >
