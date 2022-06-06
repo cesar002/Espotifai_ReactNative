@@ -7,6 +7,7 @@ import artistaSlice from '@redux/slices/artistaSlice';
 import trackSlice from '@redux/slices/trackSlice';
 import albumSlice from '@redux/slices/albumSlice';
 import userSlice from '@redux/slices/usersSlice';
+import netStatusSlice from '@redux/slices/netStatusSlice';
 import sagas from '@redux/saga';
 
 import SearchRepositoryImpl from '@core/data/repositoriesImpl/SearchRepositoryImpl';
@@ -37,6 +38,7 @@ const store = configureStore({
         track: trackSlice,
         album: albumSlice,
         user: userSlice,
+        netStatus: netStatusSlice,
     },
     middleware: (getDefaultMiddleware) => getDefaultMiddleware({
         serializableCheck: false

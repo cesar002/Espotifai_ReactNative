@@ -21,7 +21,7 @@ const MainBottomTabNavigation: React.FunctionComponent = () => {
                 shadow: true,
                 dotSize: DotSize.SMALL,
                 dotCornerRadius:100,
-                activeColors: '#154360',
+                activeColors: '#F4F6F7',
                 activeTabBackgrounds: ['#5DADE2', '#5DADE2', '#5DADE2', '#5DADE2'],
                 tabBarBackground: 'white',
                 horizontalPadding: 5,

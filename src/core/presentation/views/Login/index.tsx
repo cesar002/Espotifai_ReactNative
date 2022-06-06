@@ -1,4 +1,4 @@
-import { Text, View, ScrollView } from 'react-native'
+import { Text, View, ScrollView, Alert } from 'react-native'
 import React, { Component } from 'react'
 import LinearGradientView from '@core/presentation/layouts/LinearGradientView'
 import { Formik } from 'formik';
@@ -37,7 +37,6 @@ class Login extends Component <ILoginProps> {
       const authServide = new AuthService( new UserRepositoryImpl());
       await authServide.loginUser(user)
     } catch (error) {
-      console.error(error)
     }
   }
 
